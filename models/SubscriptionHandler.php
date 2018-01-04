@@ -64,7 +64,7 @@ class SubscriptionHandler{
 						'".$subData->guProfileId."',
 						'".$subData->subscribedDate."',
 						'".$subData->coveredModules."',
-						'".$subData->description."',
+						'".$subData->desc."',
 						'".$subData->createdDate."')";
 	
 		 
