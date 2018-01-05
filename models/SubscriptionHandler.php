@@ -28,7 +28,20 @@ class SubscriptionHandler{
 	public function getByProfileId($id)
 	{
 		$query="select * from subscription where guProfileId='".$id."'";
-		return $this->db->query($query);
+		$rawData=$this->db->query($query);
+		if (isset ( $rawData )) {
+			$resultObj=new stdClass();
+			$resultData=array();
+			foreach($rawData as $key=>$valueData){
+				$resultObj=$valueData;
+				$query = "select * from course where guCourseId ='" . $valueData["guCourseId"] . "'";
+				$DetailData = $this->db->query ( $query );
+				$resultObj["CourseDetails"]=$DetailData;
+				$resultData["result"][$key]=$resultObj;
+			}
+			$resultData["error"]="00000";
+		}
+		return $resultData;
 	
 	}
 	
